@@ -4,6 +4,7 @@
 
 <ul>
 	<li> 1.- Config database information on .env </li>
+	<li> 1.1- Composer update "composer update" </li>
 	<li> 2.- Run migrations "php artisan migrate"</li>
 	<li> 3.- Run seeders "php artisan migrate:fresh --seed" </li>
 	<li> 4.- Run php serve "php run serve (get uri to config front end)"
