@@ -6,7 +6,7 @@
       :headers="headers"
       :items="books"
       :loading="loading"
-      loading-text="Cargando ..."
+      loading-text="Loading ..."
       :search="search"
       sort-by="Id"
       sort-desc
@@ -17,7 +17,7 @@
             v-model="search"
             append-icon="mdi-magnify"
             hide-details
-            label="Buscar"
+            label="Search"
             single-line
           />
           <v-spacer />
