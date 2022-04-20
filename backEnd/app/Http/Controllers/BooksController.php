@@ -23,9 +23,32 @@ class BooksController extends Controller
         }catch(\Exception $e){
             return response()->json(['error' => $e->getMessage()], 500);
         }
-
-
     }
+
+    public function getUsers(){
+		try
+    	{
+			$users = DB::table('users')
+	            ->get();
+
+	        return response()->json(['data' => $users], 200);  
+        }catch(\Exception $e){
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
+    }
+
+    public function getCategories(){
+		try
+    	{
+			$users = DB::table('categories')
+	            ->get();
+
+	        return response()->json(['data' => $users], 200);  
+        }catch(\Exception $e){
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
+    }
+
 
     public function new(Request $request)
     {
@@ -33,17 +56,16 @@ class BooksController extends Controller
             $this->validate($request, [
             'Name' => 'required | string',
             'Author' => 'required | string',
-            'CategoryId' => 'required | integer',
-            'UserId' => 'required | integer'
+            'CategoryId' => 'required | integer'
             ]);
 
             $cliente = Books::create([
                 'Name' => $request->Name,
                 'Author' => $request->Author,
                 'CategoryId' => $request->CategoryId,
-                'UserId' => $request->UserId,
+                'UserId' => $request->UserId ?? 1,
                 'PublicationDate' => new DateTime(),
-                'Status' => 'ready'
+                'Status' => 'Available'
             ]);
             
 
@@ -62,7 +84,7 @@ class BooksController extends Controller
                 'Status' => 'required'
                 ]);
 
-                $books = Books::where('id' , $request->bookId)->update([
+                $books = Books::where('id' , $request->id)->update([
                             'Name' => $request->Name,
                             'Author' => $request->Author,
                             'Status' => $request->Status                            
@@ -78,10 +100,10 @@ class BooksController extends Controller
     public function delete(Request $request){       
         try{
                 $this->validate($request, [              
-                'bookId' => 'required'
+                'id' => 'required'
                 ]);
 
-                $books = DB::table('books')->where('id', $request->bookId)->delete();
+                $books = DB::table('books')->where('id', $request->id)->delete();
             
 
             return response()->json(['success' => $books], 200);

@@ -21,4 +21,6 @@ Route::controller(BooksController::class)->group(function () {
     Route::post('/books/new', 'new');
     Route::post('/books/update', 'update');
     Route::delete('/books/delete', 'delete');
+    Route::get('/users', 'getUsers');
+    Route::get('/categories', 'getCategories');
 });
