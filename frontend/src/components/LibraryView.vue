@@ -151,7 +151,7 @@ export default {
       {
         text: "Id",
         value: "id",
-        align: "d-none",
+        align: " d-none",
       },
       {
         text: "Name",
